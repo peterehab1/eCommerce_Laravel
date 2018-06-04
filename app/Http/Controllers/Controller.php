@@ -27,4 +27,14 @@ class Controller extends BaseController
     	}
     	
     }
+
+
+    public function category($id){
+
+        $category_products = Product::where('category_id', $id)->paginate(16);
+        $products_count = Product::all()->where('category_id', $id)->count();
+
+        return view('category', compact('category_products', $category_products, 'products_count', $products_count));
+
+    }
 }

@@ -65,7 +65,9 @@
           </div>
         </div>
         <div class="container-fluid">  
-          <!-- Navbar Header  --><a href="{{ url('/') }}" class="navbar-brand"><img src="assets/images/logo.png" alt="..."></a>
+          <!-- Navbar Header  -->
+          <a href="{{ url('/') }}" class="navbar-brand"><strong>eCommerce</strong>
+          </a>
           <button type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
           <!-- Navbar Collapse -->
           <div id="navbarCollapse" class="collapse navbar-collapse">
@@ -79,8 +81,10 @@
               <!-- Multi level dropdown    -->
               <li class="nav-item dropdown"><a id="navbarDropdownMenuLink" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link">Categories<i class="fa fa-angle-down"></i></a>
                 <ul aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu">
-                  <li><a href="#" class="dropdown-item">Men</a></li>
-                  <li><a href="#" class="dropdown-item">Women</a></li>
+                  @foreach($categories as $category)
+                  <li><a href="{{ url('category/'.$category->id.'') }}" class="dropdown-item">{{ $category->name }}</a></li>
+                  @endforeach
+                  
                 </ul>
               </li>
               <!-- Multi level dropdown end-->
@@ -122,15 +126,19 @@
               <div class="cart dropdown show"><a id="cartdetails" href="https://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="icon-cart"></i>
                   <div class="cart-no">1</div></a><a href="cart.html" class="text-primary view-cart">View Cart</a>
                 <div aria-labelledby="cartdetails" class="dropdown-menu">
-                  <!-- cart item-->
+                  @foreach($cart as $c)
+
+                    <!-- cart item-->
                   <div class="dropdown-item cart-product">
                     <div class="d-flex align-items-center">
                       <div class="img"><img src="assets/images/hoodie-man-1.png" alt="..." class="img-fluid"></div>
                       <div class="details d-flex justify-content-between">
-                        <div class="text"> <a href="#"><strong>Heather Gray Hoodie</strong></a><small>Quantity: 1 </small><span class="price">$75.00 </span></div><a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
+                        <div class="text"> <a href="#"><strong>{{ $c->product->first()->name }}</strong></a><small>Quantity: 1 </small><span class="price">$75.00 </span></div><a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
                       </div>
                     </div>
                   </div>
+
+                  @endforeach
                   <!-- total price-->
                   <div class="dropdown-item total-price d-flex justify-content-between"><span>Total</span><strong class="text-primary">$75.00</strong></div>
                   <!-- call to actions-->

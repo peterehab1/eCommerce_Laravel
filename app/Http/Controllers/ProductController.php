@@ -97,8 +97,12 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
+        $colors = Color::all()->where('product_key', $product['product_key']);
+        $sizes = Size::all()->where('product_key', $product['product_key']);
+        
+        
         if($product){
-            return view('products.product', compact('product', $product));
+            return view('products.product', compact('product', $product, 'colors', $colors, 'sizes', $sizes));
         }else{
             return redirect('/');
         }

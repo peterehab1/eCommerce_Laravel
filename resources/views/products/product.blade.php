@@ -20,7 +20,7 @@
             
             <div class="ribbon-primary text-uppercase">Sale</div>
             <div data-slider-id="1" class="owl-carousel items-slider owl-drag">
-              <div class="item"><img src="https://d19m59y37dris4.cloudfront.net/hub/1-3-1/img/shirt.png" alt="shirt"></div>
+              <div class="item"><img src="{{ asset('assets/images/uploads/'.$product->image.'') }}" alt="shirt"></div>
               
             </div>
             
@@ -42,24 +42,45 @@
               </div>
             </div>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
-            <div class="d-flex align-items-center justify-content-center justify-content-lg-start">
-              <div class="quantity d-flex align-items-center">
+            
+              <form method="post" action="{{ route('cart.store') }}">
+                @csrf
+                <div class="d-flex align-items-center justify-content-center justify-content-lg-start">
+                <div class="quantity d-flex align-items-center">
                 <div class="dec-btn">-</div>
-                <input type="text" value="1" class="quantity-no">
+                <input name="quantity" type="text" value="1" class="quantity-no">
                 <div class="inc-btn">+</div>
-              </div>
-              <select id="product-size" class="bs-select">
-                <option value="small">Small</option>
-                <option value="meduim">Medium</option>
-                <option value="large">Large</option>
-                <option value="x-large">X-Large</option>
-              </select>
-            </div>
-            <ul class="CTAs list-inline">
-              <li class="list-inline-item"><a href="#" class="btn btn-template wide"> <i class="icon-cart"></i>Add to Cart</a></li>
-              <li class="list-inline-item"><a href="#" class="btn btn-template-outlined wide"> <i class="fa fa-heart-o"></i>Add to wishlist</a></li>
+                </div>
+
+                <select name="color_id" id="product-size" class="bs-select">
+                @foreach($colors as $color)
+                  <option value="{{ $color->id }}">{{ $color->color }}</option>
+                @endforeach
+                 </select>
+
+                 <select name="size_id" id="product-size" class="bs-select col-lg-3">
+                @foreach($sizes as $size)
+                  <option value="{{ $size->id }}">{{ $size->size }}</option>
+                @endforeach
+                </select>
+
+                <input hidden type="number" name="user_id" value="{{ Auth::id() }}">
+                <input hidden type="text" name="product_key" value="{{ $product->product_key }}">
+                <input hidden type="number" name="product_id" value="{{ $product->id }}">
+
+                <ul class="CTAs list-inline">
+              <li class="list-inline-item"><button class="btn btn-template wide"> <i class="icon-cart"></i>Add to Cart</button></li>
+              
             </ul>
-          </div>
+              </div>
+               </div>
+              </form>
+              
+              
+              
+            
+            
+         
         </div>
       </div>
     </section>

@@ -10,4 +10,16 @@ class Product extends Model
     {
     	return $this->hasMany('App\Color');
     }
+
+    public function Category(){
+
+    	return $this->belongsTo('App\Category');
+    }
+
+    public function cart(){
+
+    	return $this->belongsTo('App\Cart');
+    }
+
+    
 }

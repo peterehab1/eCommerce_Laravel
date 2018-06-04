@@ -13,8 +13,10 @@
 
 Route::get('/', function () {return view('home');});
 Route::get('/user/{id}', 'Controller@user');
+Route::get('/category/{id}', 'Controller@category');
 
 Auth::routes();
 
 Route::resource('/product', 'ProductController');
+Route::resource('/cart', 'CartController');
 
