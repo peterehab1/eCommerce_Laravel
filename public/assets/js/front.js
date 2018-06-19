@@ -63,6 +63,7 @@ $(function () {
     $('.inc-btn').click(function () {
         var siblings = $(this).siblings('input.quantity-no');
         siblings.val(parseInt(siblings.val(), 10) + 1);
+        document.getElementById("incc").value = parseInt(siblings.val(), 10) + 1;
     });
 
     // ------------------------------------------------------- //

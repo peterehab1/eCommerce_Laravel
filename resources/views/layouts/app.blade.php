@@ -50,7 +50,6 @@
 
     <!-- navbar-->
     <header class="header">
-      <!-- Tob Bar-->
       
       <nav class="navbar navbar-expand-lg">
         <div class="search-area">
@@ -84,6 +83,7 @@
                   @foreach($categories as $category)
                   <li><a href="{{ url('category/'.$category->id.'') }}" class="dropdown-item">{{ $category->name }}</a></li>
                   @endforeach
+
                   
                 </ul>
               </li>
@@ -124,26 +124,44 @@
 
               <!-- Cart Dropdown-->
               <div class="cart dropdown show"><a id="cartdetails" href="https://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="icon-cart"></i>
-                  <div class="cart-no">1</div></a><a href="cart.html" class="text-primary view-cart">View Cart</a>
-                <div aria-labelledby="cartdetails" class="dropdown-menu">
+                  
+                  @if($cartProductsCount > 0)
+                  <div class="cart-no">{{ $cartProductsCount }}</div></a><a href="cart.html" class="text-primary view-cart">View Cart</a>
+                  <div aria-labelledby="cartdetails" class="dropdown-menu">
                   @foreach($cart as $c)
-
                     <!-- cart item-->
                   <div class="dropdown-item cart-product">
                     <div class="d-flex align-items-center">
-                      <div class="img"><img src="assets/images/hoodie-man-1.png" alt="..." class="img-fluid"></div>
+                      <div class="img"><img src="{{ url('assets/images/uploads/'.$c->product->first()->image.'') }}" alt="..." class="img-fluid"></div>
                       <div class="details d-flex justify-content-between">
-                        <div class="text"> <a href="#"><strong>{{ $c->product->first()->name }}</strong></a><small>Quantity: 1 </small><span class="price">$75.00 </span></div><a href="#" class="delete"><i class="fa fa-trash-o"></i></a>
+                        <div class="text"> <a href="#"><strong>{{ $c->product->first()->name }}</strong></a><small>Quantity: {{ $c->quantity }} </small><span class="price">${{ $c->product->first()->price * $c->quantity}} </span></div>
+                        <form action="{{ route('cart.destroy', $c->id) }}" method="POST">
+                      @csrf
+                      @method('delete')
+                      <button class="btn-transp-red" type="submit"><i class="delete fa fa-trash"></i></button>
+                    </form>
                       </div>
                     </div>
                   </div>
 
                   @endforeach
                   <!-- total price-->
-                  <div class="dropdown-item total-price d-flex justify-content-between"><span>Total</span><strong class="text-primary">$75.00</strong></div>
+                  <div class="dropdown-item total-price d-flex justify-content-between"><span>Total</span><strong class="text-primary">${{ $total }}</strong></div>
                   <!-- call to actions-->
-                  <div class="dropdown-item CTA d-flex"><a href="cart.html" class="btn btn-template wide">View Cart</a><a href="checkout1.html" class="btn btn-template wide">Checkout</a></div>
+                  <div class="dropdown-item CTA d-flex"><a href="{{ url('/cart') }}" class="btn btn-template wide">View Cart</a><a href="checkout1.html" class="btn btn-template wide">Checkout</a></div>
                 </div>
+                  @else
+                  </a><a href="cart.html" class="text-primary view-cart">View Cart</a>
+                  <div aria-labelledby="cartdetails" class="dropdown-menu">
+                  <div class="dropdown-item cart-product">
+                    <div class="d-flex align-items-center">
+                      <p>Your shopping cart is Empty</p>
+                    </div>
+                  </div>
+                  </div>
+                  @endif
+
+                
               </div>
             </div>
             </div>

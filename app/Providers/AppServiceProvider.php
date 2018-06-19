@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) 
         {
             $cart = Cart::all()->where('user_id', Auth::id())->where('ordered', 0);
+            $cartProductsCount = Cart::all()->where('user_id', Auth::id())->where('ordered', 0)->count();
             $total = 0;
 
             //Get the Sum of the order
@@ -38,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
             }
 
             //...with this variable
-            $view->with('cart', $cart);    
+            $view->with('cart', $cart)->with('total', $total)->with('cartProductsCount', $cartProductsCount);    
         });  
 
     }

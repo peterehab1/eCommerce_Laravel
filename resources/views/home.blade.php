@@ -1,3 +1,7 @@
+@if(Session::has('message'))
+<h6 class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</h6>
+@endif
+
 @extends('layouts.app')
 @section('content')
 <!-- Hero Section-->

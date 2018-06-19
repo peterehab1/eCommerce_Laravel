@@ -21,7 +21,11 @@ class Carts extends Migration
             $table->integer('color_id')->nullable();
             $table->integer('size_id')->nullable();
             $table->integer('user_id');
-            $table->tinyInteger('ordered')->default(0);
+            ##Ordered Explain 
+            // 0 Means Not Ordered Yet
+            // 1 Means Order is Placed
+            // 2 Means Ordered Arrived
+            $table->tinyInteger('ordered')->default(0); // => 0 Means Not Ordered Yet
             $table->timestamps();
         });
     }

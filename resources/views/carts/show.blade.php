@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('content')
-
-      
-    <!-- Hero Section-->
+  
+ @if($cart->first() != '')
+  <!-- Hero Section-->
     <section class="hero hero-page gray-bg padding-small">
       <div class="container">
         <div class="row d-flex">
@@ -24,8 +24,8 @@
                 <div class="col-5">Product</div>
                 <div class="col-2">Price</div>
                 <div class="col-2">Quantity</div>
-                <div class="col-2">Total</div>
-                <div class="col-1 text-center">Remove</div>
+                <div class="col-1">Total</div>
+                <div class="col-2 text-center">Action</div>
               </div>
             </div>
             <div class="basket-body">
@@ -54,14 +54,32 @@
                   <div class="col-2">
                     <div class="d-flex align-items-center">
                       <div class="quantity d-flex align-items-center">
-                        <div class="dec-btn">-</div>
-                        <input type="text" value="{{ $c->quantity }}" class="quantity-no">
-                        <div class="inc-btn">+</div>
+                        
+                        <form action="{{ route('cart.update', $c->id) }}" method="POST">
+                           @csrf
+                            @method('put')
+
+                            <input hidden name="id" type="number" value="{{ $c->id }}">
+                            <input name="quantity" type="number" value="{{ $c->quantity }}" class="quantity-no">
+                            <button  class="btn-transp-green" type="submit">Update <i class="fa fa-check"></i></button>
+
+                        </form>
+                        
                       </div>
                     </div>
                   </div>
-                  <div class="col-2"><span>${{ $c->quantity * $c->product->first()->price}}</span></div>
-                  <div class="col-1 text-center"><i class="delete fa fa-trash"></i></div>
+                  <div class="col-1"><span>${{ $c->quantity * $c->product->first()->price}}</span></div>
+                  <div class="col-2 text-center">
+                    <form action="{{ route('cart.destroy', $c->id) }}" method="POST">
+                      @csrf
+                      @method('delete')
+                      <button class="btn-transp-red" type="submit">Delete <i class="delete fa fa-trash"></i></button>
+                    </form>
+                    
+                    
+                      
+                    
+                  </div>
                 </div>
               </div>
 
@@ -72,52 +90,34 @@
         </div>
       </div>
       <div class="container">
-        <div class="CTAs d-flex align-items-center justify-content-center justify-content-md-end flex-column flex-md-row"><a href="shop.html" class="btn btn-template-outlined wide">Continue Shopping</a><a href="#" class="btn btn-template wide">Update Cart</a></div>
+        <div class="CTAs d-flex align-items-center justify-content-center justify-content-md-end flex-column flex-md-row"><a href="{{ url('/') }}" class="btn btn-template-outlined wide">Continue Shopping</a></div>
       </div>
     </section>
     <!-- Order Details Section-->
     <section class="order-details no-padding-top"> 
       <div class="container">
         <div class="row">                         
-          <div class="col-lg-6">
-            <div class="block">
-              <div class="block-header">
-                <h6 class="text-uppercase">Coupon Code</h6>
-              </div>
-              <div class="block-body">
-                <p>If you have a coupon code, please enter it in the box below</p>
-                <form action="#">
-                  <div class="form-group d-flex">
-                    <input type="text" name="coupon">
-                    <button type="submit" class="cart-black-button">Apply coupon</button>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div class="block">
-              <div class="block-header">
-                <h6 class="text-uppercase">Instructions for seller</h6>
-              </div>
-              <div class="block-body">
-                <p>If you have some information for the seller you can leave them in the box below</p>
-                <form action="#">
-                  <textarea name="instructions"></textarea>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6">
+          
+          <div class="col-lg-12">
             <div class="block">
               <div class="block-header">
                 <h6 class="text-uppercase">Order Summary</h6>
               </div>
-              <div class="block-body">
-                <p>Shipping and additional costs are calculated based on values you have entered.</p>
+              <div class="block-body">         
                 <ul class="order-menu list-unstyled">
-                  <li class="d-flex justify-content-between"><span>Order Subtotal </span><strong>$390.00</strong></li>
-                  <li class="d-flex justify-content-between"><span>Shipping and handling</span><strong>$10.00</strong></li>
-                  <li class="d-flex justify-content-between"><span>Tax</span><strong>$0.00</strong></li>
-                  <li class="d-flex justify-content-between"><span>Total</span><strong class="text-primary price-total">${{ $total }}</strong></li>
+                  
+                 <form class="form-inline">
+                  <div class="form-group mb-2">
+                    
+                  </div>
+                  <div class="form-group mx-sm-1 mb-2">
+                    
+                    <input type="text" class="form-control" id="Coupon" placeholder="Add Coupon">
+                  </div>
+                  <button type="submit" class="btn btn-primary mb-2">Check Availability</button>
+                </form>
+
+                  <li class="d-flex justify-content-between"><span><strong>Total</strong></span><strong class="text-primary price-total">${{ $total }}</strong></li>
                 </ul>
               </div>
             </div>
@@ -128,4 +128,29 @@
     </section>
 
 
+ 
+ @else
+
+  <!-- Hero Section-->
+    <section class="hero hero-page gray-bg padding-small">
+      <div class="container">
+        <div class="row d-flex">
+          <div class="col-lg-9 order-2 order-lg-1">
+            <h1>Shopping cart</h1>
+          </div>
+          <div class="col-lg-3 text-right order-1 order-lg-2">
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Shopping Cart Section-->
+    <section class="shopping-cart">
+      <div class="container">
+        <h1>Your Shopping Cart is Empty !</h1>
+      </div>
+    </section>
+    
+
+
+ @endif 
 @endsection

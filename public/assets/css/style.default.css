@@ -17,3 +17,26 @@ a,span,i,small{display:inline-block;text-decoration:none}a{-webkit-transition:al
     font-weight: 900;
     display: none;
 }
+
+.btn-transp-red{
+
+	background: transparent;
+	border: none;
+	color: red;
+}
+
+.btn-transp-green{
+
+	background: transparent;
+	border: none;
+	color: green;
+}
+
+.product-info{
+	box-shadow: 1px 1px 1px #d0d0d0;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	padding: 10px;
+
+}
+
