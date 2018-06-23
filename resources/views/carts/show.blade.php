@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-  
+
  @if($cart->first() != '')
   <!-- Hero Section-->
     <section class="hero hero-page gray-bg padding-small">
@@ -106,23 +106,13 @@
               <div class="block-body">         
                 <ul class="order-menu list-unstyled">
                   
-                 <form class="form-inline">
-                  <div class="form-group mb-2">
-                    
-                  </div>
-                  <div class="form-group mx-sm-1 mb-2">
-                    
-                    <input type="text" class="form-control" id="Coupon" placeholder="Add Coupon">
-                  </div>
-                  <button type="submit" class="btn btn-primary mb-2">Check Availability</button>
-                </form>
-
+                 
                   <li class="d-flex justify-content-between"><span><strong>Total</strong></span><strong class="text-primary price-total">${{ $total }}</strong></li>
                 </ul>
               </div>
             </div>
           </div>
-          <div class="col-lg-12 text-center CTAs"><a href="checkout1.html" class="btn btn-template btn-lg wide">Proceed to checkout<i class="fa fa-long-arrow-right"></i></a></div>
+          <div class="col-lg-12 text-center CTAs"><a href="{{ route('order.create') }}" class="btn btn-template btn-lg wide">Proceed to checkout<i class="fa fa-long-arrow-right"></i></a></div>
         </div>
       </div>
     </section>

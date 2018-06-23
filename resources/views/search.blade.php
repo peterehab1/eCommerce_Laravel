@@ -7,7 +7,7 @@
       <div class="container">
         <div class="row d-flex">
           <div class="col-lg-9 order-2 order-lg-1">
-            <h1>Shop</h1>
+            <h1>Found ({{ $products_count }}) Matches with your search "{{ $word }}"</h1>
           </div>
           <div class="col-lg-3 text-right order-1 order-lg-2">
             
@@ -20,11 +20,11 @@
         <div class="row">
           <!-- Grid -->
           <div class="products-grid col-12 sidebar-none">
-            <header class="d-flex justify-content-between align-items-start"><span class="visible-items">Showing<strong>  {{ $category_products->count() }}  Of <strong>{{ $products_count }}</strong> </strong>Product</span>
+            <header class="d-flex justify-content-between align-items-start"><span class="visible-items">Showing<strong>  {{ $products->count() }}  Of <strong>{{ $products_count }}</strong> </strong>Product</span>
             </header>
             <div class="row">
              
-             @foreach($category_products as $product)
+             @foreach($products as $product)
 
               <!-- item-->
               <div class="item col-xl-3 col-lg-4 col-md-6">
@@ -44,7 +44,7 @@
 
               
             </div>
-           {{ $category_products->links() }}
+          {{ $products->links() }}
           </div>
           <!-- / Grid End-->
         </div>

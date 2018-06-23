@@ -162,7 +162,7 @@
 
                 
                 <br>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                   <label for="product_category" class="form-label">Category</label>
                   <select required id="product_category" name="product_category" class="form-control">
                     @foreach($category as $c)
@@ -171,7 +171,17 @@
                   </select>
                 </div>
 
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
+                  <label for="product_gender" class="form-label">Gender</label>
+                  <select required id="product_gender" name="product_gender" class="form-control">
+                   
+                      <option value="1">Men</option>
+                      <option value="2">Women</option>
+                   
+                  </select>
+                </div>
+
+                <div class="form-group col-md-4">
                   <label for="stock" class="form-label">Stock</label>
                   <input required id="stock" type="number" name="product_stock" placeholder="How many do you have ?" class="form-control">
                 </div>

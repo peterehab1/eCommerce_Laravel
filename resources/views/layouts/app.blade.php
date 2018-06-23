@@ -55,9 +55,10 @@
         <div class="search-area">
           <div class="search-area-inner d-flex align-items-center justify-content-center">
             <div class="close-btn"><i class="icon-close"></i></div>
-            <form action="#">
+            <form action="{{ route('search') }}" method="post">
+              @csrf
               <div class="form-group">
-                <input type="search" name="search" id="search" placeholder="What are you looking for?">
+                <input type="search" name="search_word" id="search" placeholder="What are you looking for?">
                 <button type="submit" class="submit"><i class="icon-search"></i></button>
               </div>
             </form>
@@ -75,22 +76,30 @@
               </li>
               <li class="nav-item"><a href="category.html" class="nav-link"></a>
               </li>
-              
-             
+
               <!-- Multi level dropdown    -->
-              <li class="nav-item dropdown"><a id="navbarDropdownMenuLink" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link">Categories<i class="fa fa-angle-down"></i></a>
+              <li class="nav-item dropdown"><a id="navbarDropdownMenuLink" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link">Men<i class="fa fa-angle-down"></i></a>
                 <ul aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu">
                   @foreach($categories as $category)
-                  <li><a href="{{ url('category/'.$category->id.'') }}" class="dropdown-item">{{ $category->name }}</a></li>
-                  @endforeach
-
-                  
+                  <li><a href="{{ url('category/'.$category->id.'/men') }}" class="dropdown-item">{{ $category->name }}</a></li>
+                  @endforeach    
                 </ul>
               </li>
-              <!-- Multi level dropdown end-->
-              <li class="nav-item"><a href="blog.html" class="nav-link">Blog </a>
+
+              <!-- Multi level dropdown    -->
+              <li class="nav-item dropdown"><a id="navbarDropdownMenuLink" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link">Women<i class="fa fa-angle-down"></i></a>
+                <ul aria-labelledby="navbarDropdownMenuLink" class="dropdown-menu">
+                  @foreach($categories as $category)
+                  <li><a href="{{ url('category/'.$category->id.'/women') }}" class="dropdown-item">{{ $category->name }}</a></li>
+                  @endforeach    
+                </ul>
               </li>
-              <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a>
+
+
+              <!-- Multi level dropdown end-->
+              <li class="nav-item"><a href="{{ url('/blog') }}" class="nav-link">Blog </a>
+              </li>
+              <li class="nav-item"><a href="{{ url('/contact') }}" class="nav-link">Contact</a>
               </li>
             </ul>
             <div class="right-col d-flex align-items-lg-center flex-column flex-lg-row">
@@ -148,7 +157,7 @@
                   <!-- total price-->
                   <div class="dropdown-item total-price d-flex justify-content-between"><span>Total</span><strong class="text-primary">${{ $total }}</strong></div>
                   <!-- call to actions-->
-                  <div class="dropdown-item CTA d-flex"><a href="{{ url('/cart') }}" class="btn btn-template wide">View Cart</a><a href="checkout1.html" class="btn btn-template wide">Checkout</a></div>
+                  <div class="dropdown-item CTA d-flex"><a href="{{ url('/cart') }}" class="btn btn-template wide">View Cart</a><a href="{{ route('order.create') }}" class="btn btn-template wide">Checkout</a></div>
                 </div>
                   @else
                   </a><a href="cart.html" class="text-primary view-cart">View Cart</a>

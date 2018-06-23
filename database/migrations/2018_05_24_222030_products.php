@@ -19,6 +19,7 @@ class Products extends Migration
             $table->string('name');
             $table->text('desc');
             $table->integer('category_id');
+            $table->tinyInteger('gender');//##1 Means Men ##2 Means Women 
             $table->string('image');
             $table->integer('review_id')->nullabale();
             $table->integer('stock');

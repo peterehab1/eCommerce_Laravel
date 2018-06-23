@@ -18,7 +18,7 @@
         <div class="row">
           <div class="product-images col-lg-6">
             
-            <div class="ribbon-primary text-uppercase">Sale</div>
+            
             <div data-slider-id="1" class="owl-carousel items-slider owl-drag">
               <div class="item"><img src="{{ asset('assets/images/uploads/'.$product->image.'') }}" alt="shirt"></div>
               
@@ -31,17 +31,9 @@
                 <li class="list-inline-item current">${{ $product->price }}</li>
                 <!--<li class="list-inline-item original">$90.00</li>-->
               </ul>
-              <div class="review d-flex align-items-center">
-                <ul class="rate list-inline">
-                  <li class="list-inline-item"><i class="fa fa-star-o text-primary"></i></li>
-                  <li class="list-inline-item"><i class="fa fa-star-o text-primary"></i></li>
-                  <li class="list-inline-item"><i class="fa fa-star-o text-primary"></i></li>
-                  <li class="list-inline-item"><i class="fa fa-star-o text-primary"></i></li>
-                  <li class="list-inline-item"><i class="fa fa-star-o text-primary"></i></li>
-                </ul><span class="text-muted">No reviews</span>
-              </div>
+              
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
+            <p>{{ substr($product->desc, 1, 100) }} .. </p>
             
               <form method="post" action="{{ route('cart.store') }}">
                 @csrf

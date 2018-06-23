@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Cart;
+use App\User;
+use App\Product;
 use Auth;
 use DB;
+
 
 
 class CartController extends Controller
@@ -15,10 +18,14 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+   
     public function index()
     {
         $cart = Cart::all()->where('user_id', Auth::id())->where('ordered', 0);
         $total = 0;
+
+        
 
         //Get the Sum of the order
         foreach ($cart as $c) {
@@ -36,7 +43,7 @@ class CartController extends Controller
      */
     public function create()
     {
-        //
+         
     }
 
     /**

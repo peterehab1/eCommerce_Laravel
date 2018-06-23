@@ -8,6 +8,7 @@ use App\Product;
 use App\Color;
 use App\Size;
 
+
 use App\Helpers;
 
 
@@ -72,6 +73,7 @@ class ProductController extends Controller
         $product->price = $request->product_price;
         $product->desc = $request->product_desc;
         $product->category_id = $request->product_category;
+        $product->gender = $request->product_gender;
         $product->stock = $request->product_stock;
         $product->user_id = $request->user_id;
         $product->save();
@@ -98,7 +100,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::find($id);
+        $product = Product::where('status', 1)->find($id);
         $colors = Color::all()->where('product_key', $product['product_key']);
         $sizes = Size::all()->where('product_key', $product['product_key']);
         
@@ -131,7 +133,20 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Product::where('id', $id)->update(['name' => $request->product_name, 'price' => $request->product_price, 'desc' => $request->product_desc, 'category_id' => $request->product_category, 'stock' => $request->product_stock]);
+        return back();    
+    }
+
+    public function pause($id){
+
+        Product::where('id', $id)->update(['status' => 0]);
+        return back();
+    }
+
+    public function continue($id){
+
+        Product::where('id', $id)->update(['status' => 1]);
+        return back();
     }
 
     /**
@@ -142,6 +157,8 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+        return back();
     }
 }
