@@ -1,3 +1,4 @@
+@section('title', 'New Payment')
 @extends('layouts.app')
 @section('content')
 

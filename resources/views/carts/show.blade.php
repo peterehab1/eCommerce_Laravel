@@ -1,3 +1,4 @@
+@section('title', 'Cart')
 @extends('layouts.app')
 @section('content')
 

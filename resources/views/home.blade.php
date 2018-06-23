@@ -1,7 +1,7 @@
 @if(Session::has('message'))
 <h6 class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</h6>
 @endif
-
+@section('title', 'Home')
 @extends('layouts.app')
 @section('content')
 <!-- Hero Section-->
@@ -124,7 +124,7 @@
             <div class="post d-flex align-items-center flex-md-row flex-column">
               <div class="thumbnail d-flex-align-items-center justify-content-center"><img src="{{ asset('assets/images/uploads/'.$blog->image.'') }}" alt="..."></div>
               <div class="info"> 
-                <h4 class="h5"> <a href="post.html">{{ $blog->title }}</a></h4><span class="date"><i class="fa fa-clock-o"></i>{{ $blog->created_at }}</span>
+                <h4 class="h5"> <a href="{{ url('blog/'.$blog->id.'') }}">{{ $blog->title }}</a></h4><span class="date"><i class="fa fa-clock-o"></i>{{ $blog->created_at }}</span>
                 <p>{{ substr($blog->post, 0, 150) }}</p><a href="{{ url('blog/'.$blog->id.'') }}" class="read-more">Read More<i class="fa fa-long-arrow-right"></i></a>
               </div>
             </div>

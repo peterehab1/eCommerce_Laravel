@@ -1,3 +1,4 @@
+@section('title', 'Create New Blog')
 @extends('layouts.app')
 @section('content')
 

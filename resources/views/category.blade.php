@@ -1,3 +1,4 @@
+@section('title', 'Products')
 @extends('layouts.app')
 @section('content')
 
@@ -35,7 +36,7 @@
                       <div class="CTA d-flex align-items-center justify-content-center"><a href="{{ url('product/'.$product->id.'') }}" class="visit-product active"><i class="icon-search"></i>View</a></div>
                     </div>
                   </div>
-                  <div class="title"><small class="text-muted">{{ $product->category['name'] }}</small><a href="detail.html">
+                  <div class="title"><small class="text-muted">{{ $product->category['name'] }}</small><a href="{{ url('product/'.$product->id.'') }}">
                       <h3 class="h6 text-uppercase no-margin-bottom">{{ $product->name }}</h3></a><span class="price text-muted">{{ $product->price }}$</span></div>
                 </div>
               </div>

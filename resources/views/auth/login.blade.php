@@ -1,5 +1,5 @@
+@section('title', 'Authorization')
 @extends('layouts.app')
-
 @section('content')
 <div style="margin-bottom: 50px;"></div>
 <div class="container">

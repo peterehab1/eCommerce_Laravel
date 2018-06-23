@@ -1,3 +1,4 @@
+@section('title', 'New Address')
 @extends('layouts.app')
 @section('content')
 
